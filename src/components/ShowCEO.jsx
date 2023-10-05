@@ -1,5 +1,3 @@
-import React from 'react';
-
 function ShowCEO({ employees, roles }) {
    return (
       <div className="table">
