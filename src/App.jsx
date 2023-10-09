@@ -2,8 +2,8 @@ import Header from './components/Header';
 import { useEffect, useState, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ShowCEO from './components/ShowCEO';
-import PageOne from './pages/PageOne';
-import PageTwo from './pages/PageTwo';
+import Location from './pages/Location';
+import Search from './pages/Search';
 
 import baseLink from './api';
 function App() {
@@ -26,13 +26,13 @@ function App() {
                <Routes>
                   <Route path="/" element={<ShowCEO employees={employees} roles={roles} />} />
                   <Route
-                     path="/page-one/:city"
-                     element={<PageOne employees={employees} roles={roles} />}
+                     path="/location/:city"
+                     element={<Location employees={employees} roles={roles} />}
                   />
                   <Route
-                     path="/page-two"
+                     path="/search"
                      element={
-                        <PageTwo
+                        <Search
                            employees={employees}
                            roles={roles}
                            locations={locations}

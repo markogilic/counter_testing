@@ -1,8 +1,9 @@
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import baseLinks from '../api';
+import { filter } from '../utilitie/function';
 
-function PageOne({ employees, roles }) {
+function Location({ employees, roles }) {
    const { city } = useParams();
    const [cityList, setCityList] = useState([]);
    const [currentCity, setCurrentCity] = useState([]);
@@ -12,10 +13,11 @@ function PageOne({ employees, roles }) {
       });
    }, []);
    useEffect(() => {
-      cityList.map((item) => {
-         if (Object.keys(item)[0].toLocaleLowerCase() === city.toLocaleLowerCase())
-            setCurrentCity(Object.values(item));
-      });
+      // cityList.map((item) => {
+      //    if (Object.keys(item)[0].toLocaleLowerCase() === city.toLocaleLowerCase())
+      //       setCurrentCity(Object.values(item));
+      // });
+      filter(cityList, city, setCurrentCity);
    }, [cityList, city]);
 
    return (
@@ -40,4 +42,4 @@ function PageOne({ employees, roles }) {
    );
 }
 
-export default PageOne;
+export default Location;

@@ -1,6 +1,23 @@
 import { useState, useRef } from 'react';
 
-function PageTwo({ employees, roles, locations, empInLocation }) {
+function loadItems(items) {
+   return items.map((item, idx) => (
+      <option key={idx} value={idx}>
+         {item}
+      </option>
+   ));
+}
+
+function showList(employees) {
+   return employees.map((employee) => (
+      <div key={employee.id} className="table-cell">
+         <div className="name">{employee.name}</div>
+         <div className="role">{employee.status}</div>
+      </div>
+   ));
+}
+
+function Search({ employees, roles, locations, empInLocation }) {
    const [search, setSearch] = useState('');
    const [role, setRole] = useState('');
    const [location, setLocation] = useState('');
@@ -16,6 +33,7 @@ function PageTwo({ employees, roles, locations, empInLocation }) {
       e.preventDefault();
       setRole(e.target.value);
    };
+
    const handleLocation = (e) => {
       e.preventDefault();
       setLocation(e.target.value);
@@ -59,33 +77,26 @@ function PageTwo({ employees, roles, locations, empInLocation }) {
             />
             <select className="select" onChange={handleRole} ref={roleRef}>
                <option value=""> Role</option>
-               {roles.map((role, idx) => (
-                  <option key={idx} value={idx}>
-                     {role}
-                  </option>
-               ))}
+               {loadItems(roles)}
             </select>
             <select className="select" onChange={handleLocation} ref={locationRef}>
                <option value="">Location</option>
-               {locations.map((location, idx) => (
-                  <option key={idx} value={idx}>
-                     {location}
-                  </option>
-               ))}
+               {loadItems(locations)}
             </select>
             <button onClick={handleClear}>Clear Search</button>
          </form>
          <div className="table">
-            {employees.map((employee) => (
+            {/* {employees.map((employee) => (
                <div key={employee.id} className="table-cell">
                   <div className="name">{employee.name}</div>
                   <div className="role">{employee.status}</div>
                </div>
-            ))}
+            ))} */}
+            {showList(employees)}
             {employees.length === 0 && <div>No result</div>}
          </div>
       </div>
    );
 }
 
-export default PageTwo;
+export default Search;

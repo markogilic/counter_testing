@@ -9,7 +9,7 @@ function NavBar() {
                <li>Home</li>
             </Link>
             <City />
-            <Link to="/page-two" style={{ textDecoration: 'none' }}>
+            <Link to="/search" style={{ textDecoration: 'none' }}>
                <li>Search</li>
             </Link>
          </ul>

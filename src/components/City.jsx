@@ -17,11 +17,18 @@ export default function App() {
    const [isOpen, setIsOpen] = useState(false);
    const [city, setCity] = useState([]);
    useEffect(() => {
-      baseLinks.get('/employeesInLocations').then((res) => setCity(res.data));
+      baseLinks.get('/locations').then((res) => setCity(res.data));
    }, []);
-   const getObjectKeys = (obj) => {
-      return Object.keys(obj);
-   };
+
+   function loadCity(city) {
+      return city.map((city, idx) => (
+         <div key={idx} onClick={() => setIsOpen(!isOpen)}>
+            <Link to={`/location/${city}`}>
+               <motion.li variants={itemVariants}>{city}</motion.li>
+            </Link>
+         </div>
+      ));
+   }
    return (
       <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'} className="city-menu">
          <motion.button whileTap={{ scale: 0.97 }} onClick={() => setIsOpen(!isOpen)}>
@@ -63,21 +70,22 @@ export default function App() {
             }}
             style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
          >
-            <Suspense fallback={<div>Loading...</div>}>
-               {/* <motion.li variants={itemVariants}>Item 1 </motion.li>
-               <motion.li variants={itemVariants}>Item 2 </motion.li>
-               <motion.li variants={itemVariants}>Item 3 </motion.li>
-               <motion.li variants={itemVariants}>Item 4 </motion.li>
-               <motion.li variants={itemVariants}>Item 5 </motion.li> */}
-               {city.map((city, idx) => (
-                  <div key={idx}>
-                     <Link to={`/page-one/${getObjectKeys(city)}`}>
-                        <motion.li variants={itemVariants}>{getObjectKeys(city)}</motion.li>
-                     </Link>
-                  </div>
-               ))}
-            </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>{loadCity(city)}</Suspense>
          </motion.ul>
       </motion.nav>
    );
 }
+
+//some old code
+/* <motion.li variants={itemVariants}>Item 1 </motion.li>
+               <motion.li variants={itemVariants}>Item 2 </motion.li>
+               <motion.li variants={itemVariants}>Item 3 </motion.li>
+               <motion.li variants={itemVariants}>Item 4 </motion.li>
+               <motion.li variants={itemVariants}>Item 5 </motion.li> */
+/* {city.map((city, idx) => (
+                  <div key={idx} onClick={() => setIsOpen(!isOpen)}>
+                     <Link to={`/location/${city}`}>
+                        <motion.li variants={itemVariants}>{city}</motion.li>
+                     </Link>
+                  </div>
+               ))} */
