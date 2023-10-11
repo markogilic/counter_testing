@@ -1,3 +1,6 @@
+import someContext from '../context/context';
+import { useContext, useEffect } from 'react';
+
 function showCEOfromEmployees(employees, roles) {
    return employees
       .filter(
@@ -11,7 +14,13 @@ function showCEOfromEmployees(employees, roles) {
       ));
 }
 
-function ShowCEO({ employees, roles }) {
+function ShowCEO() {
+   const { fetchEmployees, fetchRoles, employees, roles } = useContext(someContext);
+   useEffect(() => {
+      fetchEmployees();
+      fetchRoles();
+   }, []);
+
    return <div className="table">{showCEOfromEmployees(employees, roles)}</div>;
 }
 

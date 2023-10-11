@@ -22,7 +22,7 @@ function Location({ employees, roles }) {
 
    return (
       <>
-         <h1>Employees ho live in {city}</h1>
+         <h1>Employees who live in {city}</h1>
          <div className="table">
             {/* <Suspense fallback={<div>Loading...</div>}> */}
             {employees

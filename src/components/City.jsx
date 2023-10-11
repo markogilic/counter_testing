@@ -30,7 +30,12 @@ export default function App() {
       ));
    }
    return (
-      <motion.nav initial={false} animate={isOpen ? 'open' : 'closed'} className="city-menu">
+      <motion.nav
+         initial={false}
+         animate={isOpen ? 'open' : 'closed'}
+         className="city-menu"
+         data-testid="city-1"
+      >
          <motion.button whileTap={{ scale: 0.97 }} onClick={() => setIsOpen(!isOpen)}>
             City
             <motion.div

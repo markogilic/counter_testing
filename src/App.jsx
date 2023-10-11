@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ShowCEO from './components/ShowCEO';
 import Location from './pages/Location';
 import Search from './pages/Search';
+import { ContextProvider } from './context/context';
 
 import baseLink from './api';
 function App() {
@@ -20,29 +21,31 @@ function App() {
 
    return (
       <div>
-         <BrowserRouter>
-            <Header />
-            <Suspense fallback={<div>Loading...</div>}>
-               <Routes>
-                  <Route path="/" element={<ShowCEO employees={employees} roles={roles} />} />
-                  <Route
-                     path="/location/:city"
-                     element={<Location employees={employees} roles={roles} />}
-                  />
-                  <Route
-                     path="/search"
-                     element={
-                        <Search
-                           employees={employees}
-                           roles={roles}
-                           locations={locations}
-                           empInLocation={empInLocation}
-                        />
-                     }
-                  />
-               </Routes>
-            </Suspense>
-         </BrowserRouter>
+         <ContextProvider>
+            <BrowserRouter>
+               <Header />
+               <Suspense fallback={<div>Loading...</div>}>
+                  <Routes>
+                     <Route path="/" element={<ShowCEO />} />
+                     <Route
+                        path="/location/:city"
+                        element={<Location employees={employees} roles={roles} />}
+                     />
+                     <Route
+                        path="/search"
+                        element={
+                           <Search
+                              employees={employees}
+                              roles={roles}
+                              locations={locations}
+                              empInLocation={empInLocation}
+                           />
+                        }
+                     />
+                  </Routes>
+               </Suspense>
+            </BrowserRouter>
+         </ContextProvider>
       </div>
    );
 }
