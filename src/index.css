@@ -85,11 +85,33 @@ a {
    width: 100%;
    max-width: 800px;
    display: flex;
-   justify-content: space-between;
+   flex-direction: column;
+   justify-content: center;
    align-content: center;
+   margin: auto;
+   text-align: center;
 }
-
-.nav-bar ul {
+.frame button {
+   width: 100px;
+   margin: 0 auto;
+   margin-top: 1rem;
+   padding: 0.5rem;
+   border-radius: 0.5rem;
+   background-color: #686b83;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   margin-right: 1rem;
+}
+.frame button:hover {
+   background-color: #303450;
+}
+.conditional-frame {
+   position: absolute;
+   top: 50px;
+   right: 150px;
+}
+nav-bar ul {
    display: flex;
    align-items: center;
    justify-content: center;
